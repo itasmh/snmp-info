@@ -1,8 +1,8 @@
-# SNMP::Info::Layer2::Ubiquiti
+# SNMP::Info::Layer2::Ruckus
 # $Id$
 #
 
-package SNMP::Info::Layer2::Ubiquiti;
+package SNMP::Info::Layer2::Ruckus;
 
 use strict;
 use Exporter;
@@ -12,9 +12,9 @@ use SNMP::Info::Layer3;  # only used in sub mac()
 
 
 
-@SNMP::Info::Layer2::Ubiquiti::ISA
+@SNMP::Info::Layer2::Ruckus::ISA
     = qw/SNMP::Info::IEEE802dot11 SNMP::Info::Layer2 Exporter/;
-@SNMP::Info::Layer2::Ubiquiti::EXPORT_OK = qw//;
+@SNMP::Info::Layer2::Ruckus::EXPORT_OK = qw//;
 
 use vars qw/$VERSION %FUNCS %GLOBALS %MIBS %MUNGE/;
 
@@ -93,7 +93,7 @@ sub os_ver {
 }
 
 sub vendor {
-    return 'Ubiquiti Networks, Inc.';
+    return 'Ruckus Wireless, Inc.';
 }
 
 sub model {
@@ -233,23 +233,7 @@ sub interfaces {
     return $return;
 }
 
-sub i_ignore {
-    my $l2      = shift;
-    my $partial = shift;
 
-    my $interfaces = $l2->interfaces($partial) || {};
-    my $i_descr    = $l2->i_description($partial) || {};
-
-    my %i_ignore;
-    foreach my $if ( keys %$interfaces ) {
-
-        # CPU Interface
-        if ( $i_descr->{$if} =~ /CPU Interface/i ) {
-            $i_ignore{$if}++;
-        }
-    }
-    return \%i_ignore;
-}
 
 1;
 __END__
