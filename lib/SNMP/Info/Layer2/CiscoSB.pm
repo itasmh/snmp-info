@@ -59,7 +59,8 @@ $VERSION = '3.61';
     %SNMP::Info::CiscoStats::GLOBALS,
     %SNMP::Info::CiscoConfig::GLOBALS,
     %SNMP::Info::CDP::GLOBALS,
-    'descr'  => 'sysDescr'
+    'descr'  => 'sysDescr',
+    'mac' => 'dot1dBaseBridgeAddress.0'
 );
 
 %FUNCS = (
@@ -91,7 +92,7 @@ $VERSION = '3.61';
 
 
 sub vendor {
-    return 'cisco';
+    return 'ciscoSystems';
 }
 
 sub os {
