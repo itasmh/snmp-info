@@ -1848,6 +1848,10 @@ sub device_type {
         $objtype = 'SNMP::Info::Layer2::NWSS2300'
             if (
             $desc =~ /^(Nortel\s)??Wireless\sSecurity\sSwitch\s23[568][012]\b/);
+	    
+	# Ubiquiti Networks, Inc. UniFi UAP-HD comes with IANA PEN 8072
+        $objtype = 'SNMP::Info::Layer2::Ubiquiti'
+            if ( $soid =~ /^\.?1\.3\.6\.1\.4\.1\.8072/ and $desc =~ /UAP/ );
 
         # Generic device classification based upon sysObjectID
         if (    ( $objtype eq 'SNMP::Info::Layer3' )
